@@ -112,3 +112,14 @@ $$('.fb').forEach(function (a) {
   if (FB_URL) { a.href = FB_URL; a.target = '_blank'; a.rel = 'noopener'; }
   else { a.onclick = function (e) { e.preventDefault(); }; a.title = 'Facebook link coming soon'; a.style.opacity = '.7'; }
 });
+
+/* lightbox for poster and photo links */
+var lb = $('#lb');
+if (lb) {
+  var li = $('img', lb);
+  $$('.tri a, .zoom').forEach(function (a) {
+    a.onclick = function (e) { e.preventDefault(); var i = $('img', a); li.src = a.getAttribute('href'); li.alt = i.alt; lb.classList.add('on'); };
+  });
+  lb.onclick = function () { lb.classList.remove('on'); };
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('on'); });
+}
